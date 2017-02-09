@@ -1,0 +1,26 @@
+{
+  "name": "a2o",
+  "version": "1.0.0",
+  "description": "1. This project is an attempt to enhance the user experience provided by https://academia.srmuniv.ac.in. 2. The project is respectful of the original work and it is by no means a replacement of the original. It will in fact use live data from the original website to achieve the goal. 3. The project respects the privacy of the users and hence any data retrieved for the user is not stored in any information retrieval system. 4. Any suggestions and contributions are welcome.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NihalSh/a2o.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NihalSh/a2o/issues"
+  },
+  "homepage": "https://github.com/NihalSh/a2o#readme",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "bunyan": "^1.8.5",
+    "express": "^4.14.1",
+    "express-handlebars": "^3.0.0",
+    "request": "^2.79.0"
+  }
+}
