@@ -13,6 +13,22 @@ app.set('view engine', '.hbs');
 
 app.set('port', process.env.PORT || 60000);
 
+switch(app.get('env')){
+	case 'development':
+		app.use(require('express-bunyan-logger')({
+			name: 'logger',
+			streams: [{
+				level: 'trace',
+				stream: process.stdout
+				}]
+			}));
+		break;
+	case 'production':
+		app.use(require('express-bunyan-logger')());
+		/*add file rotation*/
+		break;
+}
+
 app.use(express.static(__dirname + '/public'));
 
 app.use(bodyParser.urlencoded({
