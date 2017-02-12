@@ -5,6 +5,8 @@ let bunyan = require('bunyan');
 let express = require('express');
 let handlebars = require('express-handlebars');
 let http = require('http');
+let session = require('express-session');
+let uuid = require('uuid');
 
 let app = express();
 
@@ -36,6 +38,13 @@ app.use(bodyParser.urlencoded({
 		}
 	)
 );
+
+app.use(session({
+    genid: uuid.v4,
+    secret: 'secretkey',
+    resave: false,
+    saveUninitialized: true
+}));
 
 require('./routes.js')(app);
 
