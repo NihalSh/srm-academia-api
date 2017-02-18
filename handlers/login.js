@@ -1,11 +1,7 @@
 "use strict";
 let request = require('request');
 
-exports.get = function(req,res){
-	res.render('login');
-};
-
-exports.post = function(req,res){
+module.exports = function(req,res){
 	if(!req.body){
 		res.sendStatus(404);
 	}else{

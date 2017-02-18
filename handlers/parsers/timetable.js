@@ -1,7 +1,8 @@
-var cheerio = require('cheerio');
+"use strict";
+let cheerio = require('cheerio');
 
 module.exports = function extractData(body) {
-	"use strict"
+	"use strict";
 	let $ = cheerio.load(body);
 
 	//Get the Details

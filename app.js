@@ -10,9 +10,6 @@ let uuid = require('uuid');
 
 let app = express();
 
-app.engine('.hbs', handlebars({extname: '.hbs'}));
-app.set('view engine', '.hbs');
-
 app.set('port', process.env.PORT || 60000);
 
 switch(app.get('env')){
@@ -30,8 +27,6 @@ switch(app.get('env')){
 		/*add file rotation*/
 		break;
 }
-
-app.use(express.static(__dirname + '/public'));
 
 app.use(bodyParser.urlencoded({
 			extended: true
