@@ -1,7 +1,8 @@
+"use strict";
 let cheerio = require('cheerio');
 
 module.exports = function parser(body) {
-	"use strict"
+	"use strict";
 	let $ = cheerio.load(body);
 	
 	//header extraction
