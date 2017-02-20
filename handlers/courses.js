@@ -5,9 +5,9 @@ let options = require('./requests/course-confirmation-report.js');
 let parser = require('./parsers/course-confirmation.js');
 
 module.exports = function(req, res){
-	if(req.session.jar){
+	if(req.body && req.body.token){
 		req.log.info("authorized user");
-		options.headers['Cookie'] = req.session.jar;
+		options.headers['Cookie'] = JSON.parse(req.body.token);
 		request(options, function(error, response, body){
 				if(!error){
 					req.log.info("course request successful");

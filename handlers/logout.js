@@ -4,9 +4,8 @@ let request = require('request');
 let options = require('./requests/logout.js');
 
 module.exports = function(req,res){
-	if(req.session.jar){
-		req.session.jar = null;
-		options.headers['Cookie'] = req.session.jar;
+	if(req.body && req.body.token){
+		options.headers['Cookie'] = JSON.parse(req.body.token);
 		request(options, function(error, response, body){
 				if(!error){
 					req.log.info("logout successful");
