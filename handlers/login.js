@@ -17,7 +17,7 @@ module.exports = function(req,res){
 						res.send('login failed');
 					}else{
 						req.log.info("login successful");
-						res.send(JSON.stringify(j.getCookieString(options.url)));
+						res.send(encodeURIComponent(JSON.stringify(j.getCookieString(options.url))));
 					}
 				}else{
 						req.log.info("login request failed");

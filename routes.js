@@ -9,10 +9,10 @@ let timetable = require('./handlers/timetable.js');
 
 module.exports = function(app){
 	app.post('/', login);
-	app.post('/academic-schedule', schedule);
-	app.post('/attendance', attendance);
-	app.post('/courses', courses);
-	app.post('/details', details);
-	app.post('/logout', logout);
-	app.post('/timetable', timetable);
+	app.get('/academic-schedule/:id', schedule);
+	app.get('/attendance/:id', attendance);
+	app.get('/courses/:id', courses);
+	app.get('/details/:id', details);
+	app.get('/logout/:id', logout);
+	app.get('/timetable/:id', timetable);
 };

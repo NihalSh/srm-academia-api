@@ -11,10 +11,10 @@ let courses = null;
 let timetable = null;
 
 module.exports = function(req, res){
-	if(req.body && req.body.token){
+	if(req.params.id){
 		let promise = new Promise(function(resolve, reject){
 				let options = require('./requests/course-confirmation-report.js');
-				options.headers['Cookie'] = JSON.parse(req.body.token);
+				options.headers['Cookie'] = JSON.parse(decodeURIComponent(req.params.id));
 				request(options, function(error, response, body) {
 						if(!error){
 							req.log.info("course request successful");
@@ -47,7 +47,7 @@ module.exports = function(req, res){
 				}
 
 				return new Promise(function(resolve, reject){
-						options.headers['Cookie'] = JSON.parse(req.body.token);
+						options.headers['Cookie'] = JSON.parse(decodeURIComponent(req.params.id));
 						request(options, function(error, response, body) {
 								if(!error) {
 									req.log.info("timetable request successful");

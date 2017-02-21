@@ -33,6 +33,11 @@ app.use(bodyParser.urlencoded({
 	)
 );
 
+app.use(function(req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+	next();
+});
+
 require('./routes.js')(app);
 
 app.use(function(req, res){
