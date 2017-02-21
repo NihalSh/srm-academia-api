@@ -1,6 +1,7 @@
 "use strict";
 let cheerio = require('cheerio');
 let request = require('request');
+const querystring = require('querystring');
 
 let parserCourses = require('./parsers/course-confirmation.js');
 let parserDetails = require('./parsers/details.js');
@@ -14,7 +15,7 @@ module.exports = function(req, res){
 	if(req.params.id){
 		let promise = new Promise(function(resolve, reject){
 				let options = require('./requests/course-confirmation-report.js');
-				options.headers['Cookie'] = JSON.parse(decodeURIComponent(req.params.id));
+				options.headers['Cookie'] = querystring.unescape(req.params.id);
 				request(options, function(error, response, body) {
 						if(!error){
 							req.log.info("course request successful");
@@ -47,7 +48,7 @@ module.exports = function(req, res){
 				}
 
 				return new Promise(function(resolve, reject){
-						options.headers['Cookie'] = JSON.parse(decodeURIComponent(req.params.id));
+						options.headers['Cookie'] = querystring.unescape(req.params.id);
 						request(options, function(error, response, body) {
 								if(!error) {
 									req.log.info("timetable request successful");

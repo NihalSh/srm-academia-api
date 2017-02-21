@@ -1,11 +1,12 @@
 "use strict";
 let request = require('request');
+const querystring = require('querystring');
 
 let options = require('./requests/logout.js');
 
 module.exports = function(req,res){
 	if(req.params.id){
-		options.headers['Cookie'] = JSON.parse(decodeURIComponent(req.params.id));
+		options.headers['Cookie'] = querystring.unescape(req.params.id);
 		request(options, function(error, response, body){
 				if(!error){
 					req.log.info("logout successful");

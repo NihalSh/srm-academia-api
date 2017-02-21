@@ -1,5 +1,6 @@
 "use strict";
 let request = require('request');
+const querystring = require('querystring');
 
 let options = require('./requests/attendance.js');
 let parser = require('./parsers/attendance.js');
@@ -7,7 +8,7 @@ let parser = require('./parsers/attendance.js');
 module.exports = function(req, res){
 	if(req.params.id){
 		req.log.info("authorized user");
-		options.headers['Cookie'] = JSON.parse(decodeURIComponent(req.params.id));
+		options.headers['Cookie'] = querystring.unescape(req.params.id);
 		request(options, function(error, response, body){
 				if(!error){
 					req.log.info("attendance request successful");

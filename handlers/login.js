@@ -1,5 +1,6 @@
 "use strict";
 let request = require('request');
+const querystring = require('querystring');
 
 module.exports = function(req,res){
 	if(!req.body){
@@ -17,7 +18,7 @@ module.exports = function(req,res){
 						res.send('login failed');
 					}else{
 						req.log.info("login successful");
-						res.send(encodeURIComponent(JSON.stringify(j.getCookieString(options.url))));
+						res.send(querystring.escape(j.getCookieString(options.url)));
 					}
 				}else{
 						req.log.info("login request failed");
