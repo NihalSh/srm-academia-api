@@ -6,35 +6,49 @@ module.exports = function parser(body) {
 	let $ = cheerio.load(body);
 	
 	//header extraction
-	let schedule = [];
 	let header = [];
-	let month = [];
 	$('table[align="center"]').find('th').each(function(index, element){
-			if((index+1)%5 !== 0){
-				month.push($(element).text());
-			}else{
-				header.push(month);
-				month = [];
+			if(index < 4){
+				header.push($(element).text());
 			}
 		}
 	);
-	
-	for(let i = 0; i < header.length; i++){
-		schedule.push([]);
-		for(let j = 0, content = {}; j < header[i].length; j++, content = {}){
-			content[header[i][j]] = [];
-			schedule[i].push(content);
-		}
-	}
 
+	let regex = /([A-Za-z]+)\s+'([0-9]+)/;
+	let MONTHS = {'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'Jun': 5, 'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11};
+	let months = [];
+	let years = [];
+	let content = [];
+	$('table[align="center"]').find('th:nth-of-type(5n + 3)').each(function(index, element){
+				let test = $(element).text();
+				if (test.search(regex) != -1) {
+					let mat = test.match(regex)
+					years.push(parseInt("20" + mat[2]));
+					months.push(MONTHS[mat[1]]);
+					content.push([]);
+				}
+		}
+	);
+	let DO = null;
+	let event = null;
+	let y = null;
+	regex = /[0-9]/;
 	$('table[align="center"]').find('tr:nth-of-type(n + 1)').each(function(outer, element){
-			$(element).find('td').each(function(inner, element){
-					if((inner+1)%5 !== 0){
-						if(((inner+1)%5 === 1) && !($(element).text())){
-							//date empty
+			$(element).find('td:nth-of-type(5n + 1)').each(function(inner, element){
+					if($(element).text()){
+						if($(element).next().next().text()){
+							event = $(element).next().next().text()
 						}else{
-							schedule[ Math.floor(inner/5) ][ inner%5 ][ header [Math.floor(inner/5)] [inner%5] ].push($(element).text());
+							event = null
 						}
+						
+						let test = $(element).next().next().next().text();
+						if (test.search(regex) != -1) {
+							DO = parseInt(test);
+						}else{
+							DO = null
+						}
+						content[inner].push([(new Date(years[inner], months[inner], parseInt($(element).text()))).toDateString(), event, DO]);
 					}
 				}
 			);
@@ -55,5 +69,5 @@ module.exports = function parser(body) {
 			}
 		}
 	);
-	return [schedule, legend];
+	return [content, legend];
 };
