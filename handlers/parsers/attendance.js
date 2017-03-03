@@ -8,11 +8,11 @@ module.exports = function parser(body) {
 	//Get Subject Details
 	let subjects = [];
 	let properties = {};
-	$('table[align="center"]').first().find('tr').first().find('td').each( function (index, element) {
+	$('table[border="1"]').first().find('tr').first().find('td').each( function (index, element) {
 			properties[index] = $(element).text();
 		}
 	);
-	$('table[align="center"]').first().find('tr:nth-child(n + 2)').each( function (index, element) {
+	$('table[border="1"]').first().find('tr:nth-child(n + 2)').each( function (index, element) {
 			let subject = {};
 			$(element).find('td').each( function (index, element) {
 					subject[properties[index]] = $(element).text();
@@ -23,6 +23,7 @@ module.exports = function parser(body) {
 	);
 	
 	//Get Test Results
+	/*
 	let regexTest = /([A-Za-z\s\d]+)\/([\d.]+)[a-zA-Z&\s]+([\d.]+)/;
 		//Iterates over subjects
 	$('table[align="center"]').last().find('tbody').first().children().filter('tr:nth-child(n + 2)').each( function (index, element) {
@@ -56,6 +57,6 @@ module.exports = function parser(body) {
 			);
 		}
 	);
-	
+	*/
 	return subjects;
 };
