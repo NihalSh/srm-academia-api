@@ -1,10 +1,11 @@
 "use strict";
 
-let bunyan = require('bunyan');
-let express = require('express');
-let http = require('http');
+const bunyan = require('bunyan');
+const express = require('express');
+const helmet = require('helmet');
+const http = require('http');
 
-let app = express();
+const app = express();
 
 app.set('port', process.env.PORT || 60000);
 
@@ -23,6 +24,8 @@ switch(app.get('env')){
 		/*add file rotation*/
 		break;
 }
+
+app.use(helmet());
 
 app.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
