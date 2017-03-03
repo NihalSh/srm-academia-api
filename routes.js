@@ -8,7 +8,7 @@ let schedule = require('./handlers/schedule.js');
 let timetable = require('./handlers/timetable.js');
 
 module.exports = function(app){
-	app.post('/', login);
+	app.get('/', login);
 	app.get('/academic-schedule/:id', schedule);
 	app.get('/attendance/:id', attendance);
 	app.get('/courses/:id', courses);

@@ -1,11 +1,8 @@
 "use strict";
 
-let bodyParser = require('body-parser');
 let bunyan = require('bunyan');
 let express = require('express');
-let handlebars = require('express-handlebars');
 let http = require('http');
-let uuid = require('uuid');
 
 let app = express();
 
@@ -27,12 +24,6 @@ switch(app.get('env')){
 		break;
 }
 
-app.use(bodyParser.urlencoded({
-			extended: true
-		}
-	)
-);
-
 app.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
 	next();
@@ -41,13 +32,12 @@ app.use(function(req, res, next) {
 require('./routes.js')(app);
 
 app.use(function(req, res){
-		res.status(404);
-		res.send('404');
+		res.sendStatus(404);
 	}
 );
 app.use(function(err, req, res, next){
-		console.log(err);
-		res.send('500');
+		req.log.error(err);
+		res.sendStatus(500);
 	}
 );
 
