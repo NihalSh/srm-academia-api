@@ -9,15 +9,17 @@ module.exports = function parser(body) {
 	}
 	//Get Subject Details
 	let subjects = [];
-	let properties = {};
+	let head = [];
 	$('table[border="1"]').first().find('tr').first().find('td').each( function (index, element) {
-			properties[index] = $(element).text();
+			head.push($(element).text());
 		}
 	);
+	subjects.push(head);
+	let subject = []
 	$('table[border="1"]').first().find('tr:nth-child(n + 2)').each( function (index, element) {
-			let subject = {};
+			let subject = []
 			$(element).find('td').each( function (index, element) {
-					subject[properties[index]] = $(element).text();
+					subject.push($(element).text());
 				}
 			);
 			subjects.push(subject);
