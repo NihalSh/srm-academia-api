@@ -12,7 +12,12 @@ module.exports = function(req, res){
 		request(options, function(error, response, body){
 				if(!error){
 					req.log.info("attendance request successful");
-					res.send(parser(body));
+					let response = parser(body);
+					if(response){
+						res.send(response);
+					}else{
+						res.sendStatus(401);
+					}
 				}else{
 					req.log.info("attendance request failed");
 					req.log.error(error);

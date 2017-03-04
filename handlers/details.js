@@ -13,7 +13,12 @@ module.exports = function(req, res){
 				if(!error){
 					req.log.info("details request successful");
 					console.log(body);
-					res.send(parser(body));
+					let response = parser(body);
+					if(response){
+						res.send(response);
+					}else{
+						res.sendStatus(401);
+					}
 				}else{
 					req.log.info("details request failed");
 					req.log.error(error);

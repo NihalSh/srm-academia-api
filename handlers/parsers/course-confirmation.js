@@ -4,7 +4,9 @@ let cheerio = require('cheerio');
 module.exports = function extractData(body) {
 	"use strict";
 	let $ = cheerio.load(body);
-
+	if (!$('table').length) {
+		return null;
+	}
 	let subjects = [];
 	let properties = {};
 	$('table[align="center"]').first().find('tr').first().find('td').each( function (index, element) {

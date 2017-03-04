@@ -4,7 +4,9 @@ let cheerio = require('cheerio');
 module.exports = function extractData(body) {
 	"use strict";
 	let $ = cheerio.load(body);
-
+	if (!$('table').length) {
+		return null;
+	}
 	//Get the Details
 	let timetable = [['Day Order'], [], [], [], [], []];
 	let regex = /(\d+:\d+)\s+-\s(\d+:\d+)/;

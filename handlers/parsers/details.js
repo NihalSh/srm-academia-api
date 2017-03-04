@@ -4,7 +4,9 @@ let cheerio = require('cheerio');
 module.exports = function extractData(body) {
 	"use strict";
 	let $ = cheerio.load(body);
-
+	if (!$('table').length) {
+		return null;
+	}
 	let key = "";
 	let regex = /([A-Za-z]+[\s]*[A-Za-z]+):/;
 	let details = {};

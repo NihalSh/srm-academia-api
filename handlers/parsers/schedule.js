@@ -4,7 +4,9 @@ let cheerio = require('cheerio');
 module.exports = function parser(body) {
 	"use strict";
 	let $ = cheerio.load(body);
-	
+	if (!$('table').length) {
+		return null;
+	}	
 	//header extraction
 	let header = [];
 	$('table[align="center"]').find('th').each(function(index, element){

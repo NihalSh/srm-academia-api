@@ -4,7 +4,9 @@ let cheerio = require('cheerio');
 module.exports = function parser(body) {
 	"use strict";
 	let $ = cheerio.load(body);
-
+	if (!$('table').length) {
+		return null;
+	}
 	//Get Subject Details
 	let subjects = [];
 	let properties = {};
