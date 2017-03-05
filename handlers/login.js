@@ -5,9 +5,7 @@ const querystring = require('querystring');
 
 module.exports = function(req,res){
 	let credentials = auth(req);
-
-	console.log(auth(req));
-	if((credentials.name) && (credentials.name !== '') && (credentials.pass) && (credentials.pass !== '')){
+	if((credentials) && (credentials.name) && (credentials.name !== '') && (credentials.pass) && (credentials.pass !== '')){
 		let options = require('./requests/login.js')(credentials.name, credentials.pass);
 		let j = request.jar();
 		options['jar'] = j;
