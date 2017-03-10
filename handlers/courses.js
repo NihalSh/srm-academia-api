@@ -16,12 +16,12 @@ module.exports = function(req, res){
 					if(response){
 						res.send(response);
 					}else{
-						res.sendStatus(401);
+						res.sendStatus(400);
 					}
 				}else{
 					req.log.info("course request failed");
 					req.log.error(error);
-					res.send("Error fetching report!");
+					res.sendStatus(504);
 				}
 			}
 		);
