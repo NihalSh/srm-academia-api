@@ -41,7 +41,7 @@ module.exports = function(req,res){
 			}else{
 					req.log.info("login request failed");
 					req.log.error(error);
-					res.sendStatus(400);
+					res.sendStatus(504);
 			}
 		}
 	);
