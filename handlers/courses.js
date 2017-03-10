@@ -16,6 +16,7 @@ module.exports = function(req, res){
 					if(response){
 						res.send(response);
 					}else{
+						req.log.info("unauthorized user");
 						res.sendStatus(400);
 					}
 				}else{
@@ -26,7 +27,7 @@ module.exports = function(req, res){
 			}
 		);
 	}else{
-		req.log.info("unauthorized user");
+		req.log.info("token absent");
 		res.sendStatus(404);
 	}
 };
