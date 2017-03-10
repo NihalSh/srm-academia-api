@@ -10,16 +10,16 @@ module.exports = function(req,res){
 		request(options, function(error, response, body){
 				if(!error){
 					req.log.info("logout successful");
-					res.send('logout successful');
+					res.sendStatus(200);
 				}else{
 					req.log.info("logout failed");
 					req.log.error(error);
-					res.send('logout failed');
+					res.sendStatus(504);
 				}
 			}
 		);
 	}else{
-		req.log.info("unauthorized user");
+		req.log.info("token absent");
 		res.sendStatus(404);	
 	}
 };
