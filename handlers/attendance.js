@@ -16,17 +16,18 @@ module.exports = function(req, res){
 					if(response){
 						res.send(response);
 					}else{
-						res.sendStatus(401);
+						req.log.info("unauthorized user");
+						res.sendStatus(400);
 					}
 				}else{
 					req.log.info("attendance request failed");
 					req.log.error(error);
-					res.send("Error fetching attendance!");
+					res.send(504);
 				}
 			}
 		);
 	}else{
-		req.log.info("unauthorized user");
+		req.log.info("token absent");
 		res.sendStatus(404);
 	}
 };

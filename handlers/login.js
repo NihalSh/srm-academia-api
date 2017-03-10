@@ -33,6 +33,7 @@ module.exports = function(req,res){
 						}
 					}
 					if (token === null) {
+						req.log.info("login failed");
 						res.sendStatus(400);
 					} else {
 						res.send(querystring.escape(token));
