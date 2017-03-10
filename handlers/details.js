@@ -7,7 +7,6 @@ let parser = require('./parsers/details.js');
 
 module.exports = function(req, res){
 	if(req.params.id){
-		req.log.info("authorized user");
 		options.headers['Cookie'] = `clientauthtoken=${querystring.unescape(req.params.id)}`;
 		request(options, function(error, response, body){
 				if(!error){
@@ -15,6 +14,7 @@ module.exports = function(req, res){
 					console.log(body);
 					let response = parser(body);
 					if(response){
+						req.log.info("authorized user");
 						res.send(response);
 					}else{
 						req.log.info("unauthorized user");
