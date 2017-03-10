@@ -39,13 +39,13 @@ module.exports = function(app){
 		}
 	);
 	app.get('/logout/:id', logout);
-	app.post('/details/:id', (req, res) =>
+	app.post('/logout/:id', (req, res) =>
 		{
 			res.sendStatus(405);
 		}
 	);
 	app.get('/timetable/:id', timetable);
-	app.post('/details/:id', (req, res) =>
+	app.post('/timetable/:id', (req, res) =>
 		{
 			res.sendStatus(405);
 		}

@@ -15,7 +15,7 @@ module.exports = function(req, res){
 	if(req.params.id){
 		let promise = new Promise(function(resolve, reject){
 				let options = require('./requests/course-confirmation-report.js');
-				options.headers['Cookie'] = querystring.unescape(req.params.id);
+				options.headers['Cookie'] = `clientauthtoken=${querystring.unescape(req.params.id)}`;
 				request(options, function(error, response, body) {
 						if(!error){
 							req.log.info("course request successful");
@@ -48,7 +48,7 @@ module.exports = function(req, res){
 				}
 
 				return new Promise(function(resolve, reject){
-						options.headers['Cookie'] = querystring.unescape(req.params.id);
+						options.headers['Cookie'] = `clientauthtoken=${querystring.unescape(req.params.id)}`;
 						request(options, function(error, response, body) {
 								if(!error) {
 									req.log.info("timetable request successful");

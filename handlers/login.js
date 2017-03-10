@@ -28,7 +28,7 @@ module.exports = function(req,res){
 					for (let cookie of j.getCookies(options.url)) {
 						if (cookie.hasOwnProperty('key')) {
 							if (cookie.key === "clientauthtoken") {
-								token = `${cookie.key}=${cookie.value}`;
+								token = `${cookie.value}`;
 							}
 						}
 					}

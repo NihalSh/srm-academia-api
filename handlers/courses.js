@@ -8,7 +8,7 @@ let parser = require('./parsers/course-confirmation.js');
 module.exports = function(req, res){
 	if(req.params.id){
 		req.log.info("authorized user");
-		options.headers['Cookie'] = querystring.unescape(req.params.id);
+		options.headers['Cookie'] = `clientauthtoken=${querystring.unescape(req.params.id)}`;
 		request(options, function(error, response, body){
 				if(!error){
 					req.log.info("course request successful");
