@@ -35,9 +35,14 @@ module.exports = function(req, res){
 		promise.then(
 			function(details){
 				let options = null;
-				if (details && (details["Batch"])) {
+				req.log.trace(details);
+				if (Array.isArray(details) && (details[0].length > 0) && (details[1].length > 0)) {
 					req.log.info("student batch determined");
-					if (["Batch"] === "1") {
+					let batch = null;
+					if (details[0][details[0].length - 1] === "Batch") {
+						batch = details[1][details[1].length - 1];
+					}
+					if (batch === "1") {
 						options = require('./requests/timetable-batch1.js');
 					} else {
 						options = require('./requests/timetable-batch2.js');
@@ -71,9 +76,14 @@ module.exports = function(req, res){
 		).then(
 			function(success){
 				//generate map from slots to data
+				req.log.trace(courses);
+				req.log.trace(timetable);
+				const titleIndex = courses[0].indexOf('Course Title');
+				const venueIndex = courses[0].indexOf('Venue');
+				const slotIndex = courses[0].indexOf('Slot');
 				let map = {};
-				for (let i = 0; i < courses.length; i++){
-					map[courses[i].Slot] = toTitleCase(courses[i]['Course Title']) + (('Venue' in courses[i])?(" - " + courses[i]['Venue']):(""));
+				for (let i = 1; i < courses.length; i++){
+					map[courses[i][slotIndex]] = toTitleCase(courses[i][titleIndex]) + ((courses[i][venueIndex])?(" - " + courses[i][venueIndex]):(""));
 				}
 				//to replace slots with actual data
 				let tableRender = [];
@@ -98,7 +108,7 @@ module.exports = function(req, res){
 			}
 		);
 	}else{
-		req.log.info("unauthorized user");
+		req.log.info("token absent");
 		res.sendStatus(404);
 	}
 };
