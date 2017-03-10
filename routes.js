@@ -14,12 +14,6 @@ module.exports = function(app){
 			res.sendStatus(405);
 		}
 	);
-	app.get('/academic-schedule/:id', schedule);
-	app.post('/academic-schedule/:id', (req, res) =>
-		{
-			res.sendStatus(405);
-		}
-	);
 	app.get('/attendance/:id', attendance);
 	app.post('/attendance/:id', (req, res) =>
 		{
@@ -40,6 +34,12 @@ module.exports = function(app){
 	);
 	app.get('/logout/:id', logout);
 	app.post('/logout/:id', (req, res) =>
+		{
+			res.sendStatus(405);
+		}
+	);
+	app.get('/schedule/:id', schedule);
+	app.post('/schedule/:id', (req, res) =>
 		{
 			res.sendStatus(405);
 		}
