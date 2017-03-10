@@ -86,20 +86,14 @@ module.exports = function(req, res){
 					map[courses[i][slotIndex]] = toTitleCase(courses[i][titleIndex]) + ((courses[i][venueIndex])?(" - " + courses[i][venueIndex]):(""));
 				}
 				//to replace slots with actual data
-				let tableRender = [];
 				for (let i = 1; i < timetable.length; i++){
-					let dayorder = [];
 					for(let j = 0; j < timetable[i].length; j++){
 						if (timetable[i][j] in map) {
 							timetable[i][j] = map[timetable[i][j]];
 						}
-						let val = {};
-						val[timetable[0][j]] = timetable[i][j];
-						dayorder.push(val);
 					}
-					tableRender.push(dayorder);
 				}
-				res.send({head: timetable[0], body: tableRender});
+				res.send(timetable);
 			}
 		).catch(
 			function(error){
