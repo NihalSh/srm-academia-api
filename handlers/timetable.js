@@ -24,7 +24,6 @@ module.exports = function(req, res){
 							resolve(details);
 						}else{
 							req.log.info("course request failed");
-							req.log.error(error);
 							reject(error);
 						}
 					}
@@ -35,7 +34,6 @@ module.exports = function(req, res){
 		promise.then(
 			function(details){
 				let options = null;
-				req.log.trace(details);
 				if (Array.isArray(details) && (details[0].length > 0) && (details[1].length > 0)) {
 					req.log.info("student batch determined");
 					let batch = null;
@@ -49,7 +47,7 @@ module.exports = function(req, res){
 					}
 				} else {
 					req.log.info("student batch determination failed");
-					return null;
+					throw new Error("student batch determination failed");
 				}
 
 				return new Promise(function(resolve, reject){
@@ -61,7 +59,6 @@ module.exports = function(req, res){
 									resolve(true);
 								} else {
 									req.log.info("timetable request failed");
-									req.log.error(error);
 									reject(error);
 								}
 							}
@@ -69,15 +66,9 @@ module.exports = function(req, res){
 					}
 				);
 			}
-		).catch(
-			function(error){
-				res.send("course request failed");
-			}
 		).then(
 			function(success){
 				//generate map from slots to data
-				req.log.trace(courses);
-				req.log.trace(timetable);
 				const titleIndex = courses[0].indexOf('Course Title');
 				const venueIndex = courses[0].indexOf('Venue');
 				const slotIndex = courses[0].indexOf('Slot');
@@ -98,7 +89,7 @@ module.exports = function(req, res){
 		).catch(
 			function(error){
 				req.log.error(error);
-				res.send("timetable request failed");
+				res.sendStatus(504);
 			}
 		);
 	}else{
