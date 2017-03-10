@@ -27,7 +27,7 @@ module.exports = function parser(body) {
 					let mat = test.match(regex)
 					years.push(parseInt("20" + mat[2]));
 					months.push(MONTHS[mat[1]]);
-					content.push([]);
+					//content.push([]);
 				}
 		}
 	);
@@ -35,6 +35,7 @@ module.exports = function parser(body) {
 	let event = null;
 	let y = null;
 	regex = /[0-9]/;
+	content.push(["Date", "Event", "Day Order"]);
 	$('table[align="center"]').find('tr:nth-of-type(n + 1)').each(function(outer, element){
 			$(element).find('td:nth-of-type(5n + 1)').each(function(inner, element){
 					if($(element).text()){
@@ -50,7 +51,7 @@ module.exports = function parser(body) {
 						}else{
 							DO = null
 						}
-						content[inner].push([(new Date(years[inner], months[inner], parseInt($(element).text()))).toDateString(), event, DO]);
+						content.push([(new Date(years[inner], months[inner], parseInt($(element).text()))).toDateString(), event, DO]);
 					}
 				}
 			);
@@ -71,5 +72,6 @@ module.exports = function parser(body) {
 			}
 		}
 	);
-	return [content, legend];
+	content.unshift(legend);
+	return content;
 };
