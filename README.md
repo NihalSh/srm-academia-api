@@ -6,3 +6,6 @@
 May the fun begin!
 
 For Documentation visit http://nihalshriwastawa.com/a2o/
+
+## Products
+- iOS Attendance Widget [link](https://github.com/poke19962008/Today-Attendance)
