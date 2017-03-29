@@ -2,6 +2,7 @@
 let attendance = require('./handlers/attendance.js');
 let courses = require('./handlers/courses.js');
 let details = require('./handlers/details.js');
+let exam = require('./handlers/exam.js');
 let login = require('./handlers/login.js');
 let logout = require('./handlers/logout.js');
 let schedule = require('./handlers/schedule.js');
@@ -28,6 +29,12 @@ module.exports = function(app){
 	);
 	app.get('/details/:id', details);
 	app.post('/details/:id', (req, res) =>
+		{
+			res.sendStatus(405);
+		}
+	);
+	app.get('/exam/:id', exam);
+	app.post('/exam/:id', (req, res) =>
 		{
 			res.sendStatus(405);
 		}
