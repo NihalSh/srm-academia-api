@@ -21,7 +21,30 @@ module.exports = function(req, res){
 							req.log.info("course request successful");
 							courses = parserCourses(body);
 							details = parserDetails(body);
-							resolve(details);
+							if(details){
+								req.log.info("authorized user");
+								resolve(details);
+							}else{
+								let optionsSecondYear = require('./requests/course-confirmation-report-second-year.js');
+								optionsSecondYear.headers['Cookie'] = `clientauthtoken=${querystring.unescape(req.params.id)}`;
+								request(optionsSecondYear, function(error, response, body){
+										if(!error){
+											req.log.info("course request successful");
+											courses = parserCourses(body);
+											details = parserDetails(body);
+											if(details){
+												req.log.info("authorized user");
+												resolve(details);
+											}else{
+												reject("unauthorized user");
+											}
+										}else{
+											req.log.info("details request failed");
+											reject(error);
+										}
+									}
+								);
+							}
 						}else{
 							req.log.info("course request failed");
 							reject(error);
