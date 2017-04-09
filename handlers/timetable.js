@@ -58,14 +58,13 @@ module.exports = function(req, res){
 			function(details){
 				let options = null;
 				if (Array.isArray(details) && (details[0].length > 0) && (details[1].length > 0)) {
-					req.log.info("student batch determined");
 					let batch = null;
 					let index = details[0].indexOf("Batch");
 					if (index !== -1 ) {
 						batch = details[1][index];
-						if (batch === "1") {
+						if (batch.startsWith("1")){
 							options = require('./requests/timetable-batch1.js');
-						} else if (batch === "2"){
+						} else if (batch.startsWith("2")){
 							options = require('./requests/timetable-batch2.js');
 						} else {
 							req.log.info("student batch determination failed");
