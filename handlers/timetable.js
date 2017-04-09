@@ -60,14 +60,22 @@ module.exports = function(req, res){
 				if (Array.isArray(details) && (details[0].length > 0) && (details[1].length > 0)) {
 					req.log.info("student batch determined");
 					let batch = null;
-					if (details[0][details[0].length - 1] === "Batch") {
-						batch = details[1][details[1].length - 1];
-					}
-					if (batch === "1") {
-						options = require('./requests/timetable-batch1.js');
+					let index = details[0].indexOf("Batch");
+					if (index !== -1 ) {
+						batch = details[1][index];
+						if (batch === "1") {
+							options = require('./requests/timetable-batch1.js');
+						} else if (batch === "2"){
+							options = require('./requests/timetable-batch2.js');
+						} else {
+							req.log.info("student batch determination failed");
+							throw new Error("student batch determination failed");
+						}
 					} else {
-						options = require('./requests/timetable-batch2.js');
+						req.log.info("student batch determination failed");
+						throw new Error("student batch determination failed");
 					}
+
 				} else {
 					req.log.info("student batch determination failed");
 					throw new Error("student batch determination failed");
