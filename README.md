@@ -9,3 +9,4 @@ For Documentation visit http://nihalshriwastawa.com/a2o/
 
 ## Products
 - iOS Attendance Widget [link](https://github.com/poke19962008/Today-Attendance)
+- Android Application: SRM EZY [link](https://play.google.com/store/apps/details?id=com.srmezy&rdid=com.srmezy)
