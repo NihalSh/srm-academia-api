@@ -31,7 +31,7 @@ module.exports = function parser(body) {
 							let testscores = [];
 							//iterates over exams
 							$(element).find('td').each( function (index, element) {
-									let test = $(element).text();
+									let test = $($(element).html().replace("<br>", "&nbsp;")).text();
 									if (test.search(regexTest) != -1) {
 										let mat = test.match(regexTest)
 										testscores.push(`${mat[1]}: ${mat[3]}/${mat[2]}`)
