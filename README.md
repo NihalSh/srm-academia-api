@@ -1,4 +1,5 @@
 [![Code Climate](https://codeclimate.com/github/NihalSh/srm-academia-api/badges/gpa.svg)](https://codeclimate.com/github/NihalSh/srm-academia-api)
+[![Dependency Status](https://david-dm.org/NihalSh/srm-academia-api.svg)](https://david-dm.org/NihalSh/srm-academia-api)
 [![Known Vulnerabilities](https://snyk.io/test/github/nihalsh/srm-academia-api/badge.svg?targetFile=package.json)](https://snyk.io/test/github/nihalsh/srm-academia-api?targetFile=package.json)
 
 # Academia 2.0
